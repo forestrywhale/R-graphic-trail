@@ -17,14 +17,23 @@ packageVersion('plotly')
 ```{r}
 x = runif(1000)
 y = runif(1000)
+
+# ploting the graph as grids
 s <- subplot(
+
   plot_ly(x = x, type = "histogram", showlegend=FALSE),
   plotly_empty(),
   plot_ly(x = x, y = y, type = "histogram2dcontour", showlegend=FALSE),
-  plot_ly(y = y, type = "histogram", showlegend=FALSE),
+  plot_ly(y = y, type = "histogram", showlegend=FALSE) %>% layout(xaxis = list(range = c(0, 1)), yaxis = list(range = c(0, 1))) ,
+  
   nrows = 2, heights = c(0.2, 0.8), widths = c(0.8, 0.2),
   shareX = TRUE, shareY = TRUE, titleX = FALSE, titleY = FALSE
 )
-layout(s)
-```
 
+#showing the graph in Rstudio
+#layout(s)
+
+# save graph locally
+# though the recommended method is onca, but this one works for me.
+export(s, file = "somepath")
+```
